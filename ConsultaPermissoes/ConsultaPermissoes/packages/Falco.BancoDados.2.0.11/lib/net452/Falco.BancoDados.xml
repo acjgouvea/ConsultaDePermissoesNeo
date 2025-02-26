@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Falco.BancoDados</name>
+    </assembly>
+    <members>
+        <member name="T:Falco.BancoDados.clsBancoDados">
+            <summary>
+            <example>
+            Exemplo:
+            <code>
+            clsBancoDados.Usuario = "jonh.doe";
+            clsBancoDados.Senha = "123";
+            clsBancoDados.Servidor = "000.999.99.99";
+            clsBancoDados.Banco = "BancoDados_DB";
+            clsBancoDados.Conectar(autenticarCasoFalhe); // Opcional
+            
+            clsBancoDados.LimparParametros();
+            clsBancoDados.AdicionarParametro(parametro, valor, input);
+            dataSet = clsBancoDados.Executar(sql, tipo);
+            dataTable = dataSet.Tables[0];
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.Servidor">
+            <summary>
+            IP do servidor de banco de dados, podendo passar localhost.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.Banco">
+            <summary>
+            Nome do banco de dados.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.Usuario">
+            <summary>
+            Nome de usuário para acesso ao banco de dados, ex: sa.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.Senha">
+            <summary>
+            Senha de acesso ao banco de dados.
+            </summary>
+        </member>
+        <member name="P:Falco.BancoDados.clsBancoDados.Empresa">
+            <summary>
+            Seleciona a empresa pelo Registro do Windows conforme o caminho passado em CaminhoRegistroEmpresa. Por padrão null.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.CaminhoRegistroEmpresa">
+            <summary>
+            Caminho do Registro do Windows para selecionar a empresa pelo campo Empresa. Caso o caminho não exista ele será criado. Por padrão "HKEY_CURRENT_USER\SOFTWARE\VB and VBA Program Settings\Sermap\Configuracao".
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.CaminhoCredencial">
+            <summary>
+            Caminho do Registro do Windows para selecionar o usuario pelos campos da propriedade CaminhoCredencialCampo. Caso o caminho não exista ele será criado. Por padrão "HKEY_CURRENT_USER\SOFTWARE\VB and VBA Program Settings\MAS\SMConexao101.frmAutenticacao".
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.CaminhoCredencialCampo">
+            <summary>
+            Campos usados para selecionar o registro pelo caminho colocado na propriedade CaminhoCredencial, no formato Base|Servidor|Usuario. Caso os campos não existam eles serão criados. Por padrão "txtBase|txtServidor|usuario".
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.PermitirSelecionarEmpresa">
+            <summary>
+            Caso o banco de dados tenha a tabela empresa_T, com as colunas emp_empresa_IN, emp_razao_VC, emp_fantasia_VC, empresaspermitidas_BT, você poderá habilitar a opção de selecionar empresa 
+            no formulário de autenticação. Por padrão True.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.NomeDaSolucao">
+            <summary>
+            Parâmetro Application Name da ConnectionString. Por padrão FALCO.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.PersistirCredenciais">
+            <summary>
+            Parâmetro Persist Security Info da ConnectionString. Por padrão True.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.HabilitarRegistroWindows">
+            <summary>
+            Habilita funcionalidades relacionadas ao registro do Windows. Por padrão True.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.Output">
+            <summary>
+            Retorna todos os valores dos parametros Output passados.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.Icone">
+            <summary>
+            Insere um ícone na tela de autenticação. Por padrão o da Falco Sistemas.
+            </summary>
+        </member>
+        <member name="F:Falco.BancoDados.clsBancoDados.ServidorBancos">
+            <summary>
+            Arquivo com os servidores separados em linhas, onde cada linha estará no formato SERVIDOR|BANCO. Por padrão null.
+            </summary>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.Autenticar">
+            <summary>
+            Abre o formulário de autenticação.
+            </summary>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.Conectar(System.Boolean)">
+            <summary>
+            Conecta com o banco de dados usando as credenciais especificadas anteriormente.
+            </summary>
+            <param name="autenticarCasoFalhe">Abre a janela de autenticação caso não consiga conectar. Por padrão false.</param>
+            <exception cref="T:System.Exception">Falha ao conectar com banco de dados ou mensagem específica de erro.</exception>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.AlterarSenha(System.String)">
+            <summary>
+            Altera a senha do usuário no banco de dados usando as credenciais (Servidor, Banco, Usuário e Senha) especificadas anteriormente.
+            </summary>
+            <param name="novaSenha"></param>
+            <exception cref="T:System.Exception">Falha ao conectar com banco de dados ou mensagem específica de erro.</exception>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.RetornarCredenciaisInvalidas">
+            <summary>
+            Retorna as credenciais (Servidor, Banco, Usuário e Senha) não preenchidas.
+            </summary>
+            <returns>Lista com as credenciais não preenchidas.</returns>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.ValidarCredenciais">
+            <summary>
+            Validação das credenciais passadas (Servidor, Banco, Usuário e Senha).
+            </summary>
+            <returns>Retorna True caso esteja válido, caso contrario False.</returns>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.LimparParametros">
+            <summary>
+            Limpa a lista de parâmetros usados na execução da stored procedure ou function.
+            </summary>
+            <exception cref="T:System.Exception">Mensagem específica de erro.</exception>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.AdicionarParametro(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Adiciona um parâmetro para executar a stored procedure ou function. Lembre-se de usar LimparParametros antes de começar a inserir os parâmetros.
+            </summary>
+            <param name="nome">Nome do parâmetro.</param>
+            <param name="valor">Valor do parâmetro.</param>
+            <param name="direcao">Tipo do parâmetro.</param>
+            <exception cref="T:System.Exception">Mensagem específica de erro.</exception>
+        </member>
+        <member name="M:Falco.BancoDados.clsBancoDados.Executar(System.String,System.Data.CommandType)">
+            <summary>
+            Executa o comando SQL e retorna um DataSet contendo o retorno do banco de dados. Lembre-se de usar LimparParametros e AdicionarParametro, se for necessário, antes de executar.
+            </summary>
+            <param name="sql">Nome da Stored Procedure ou comando em SQL.</param>
+            <param name="tipo">Tipo do comando, por padrão Stored Procedure.</param>
+            <returns>Contém um DataSet com as tabelas acessadas pela propriedade Tables. A propriedade Tables vem vazia (Tables.Count == 0) caso não retorne nada.</returns>
+            <exception cref="T:System.Exception">Banco de dados não conseguiu executar o SQL ou mensagem específica de erro.</exception>
+        </member>
+        <member name="T:Falco.BancoDados.Properties.Resources">
+            <summary>
+              Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
+            </summary>
+        </member>
+        <member name="P:Falco.BancoDados.Properties.Resources.ResourceManager">
+            <summary>
+              Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
+            </summary>
+        </member>
+        <member name="P:Falco.BancoDados.Properties.Resources.Culture">
+            <summary>
+              Substitui a propriedade CurrentUICulture do thread atual para todas as
+              pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
+            </summary>
+        </member>
+        <member name="P:Falco.BancoDados.Properties.Resources.Logo">
+            <summary>
+              Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
+            </summary>
+        </member>
+        <member name="F:BancoDados.frmBancoDados.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BancoDados.frmBancoDados.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BancoDados.frmBancoDados.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BancoDados.frmEmpresa.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BancoDados.frmEmpresa.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BancoDados.frmEmpresa.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>
